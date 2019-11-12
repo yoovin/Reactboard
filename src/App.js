@@ -10,6 +10,8 @@ import Free from './routes/Free'
 import Hobby from './routes/Hobby'
 import Politics from './routes/politics'
 import News from './routes/News'
+import Post from './components/Post';
+import Write from './components/Write';
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
           <Route exact path="/about" component={About} />
           <Route exact path="/free" component={Free}/>
           <Route exact path="/hobby" component={Hobby}/>
-          <Route path="/politics" component={Politics}/>
-          <Route path="/news" component={News}/>
+          <Route exact path="/politics" component={Politics}/>
+          <Route exact path="/news" component={News}/>
+          <Route exact path="/:cate/:postId" component={Post}/>
+          <Route exact path="/:cate/write" component={Write}/>
       </div>
     </Router>
   );
