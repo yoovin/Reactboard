@@ -25,24 +25,25 @@ export default class Write extends Component {
 
     handleTitleChange = (e) => {
         this.setState({title:e.target.value})
-        // console.log(this.state.title)
     }
 
     handleBodyChange = (e) => {
         this.setState({body:e.target.value})
-        // console.log(this.state.body)
     }
 
     handleAddButton = () => {
         this.addPost()
         .then((res)=>{
-            console.log(res.data)
+            if(res.data.result === 1){
+                this.props.history.push(`/${this.state.cate}`)
+            }else{
+                console.log(res.data)
+            }
         })
     }
 
 
     render() {
-        console.log(this.props.history.location.state)
         return (
             <div>
                 <input 
@@ -51,13 +52,13 @@ export default class Write extends Component {
                 onChange={this.handleTitleChange}
                 placeholder="제목을 입력하세요"
                 ></input><br/>
-                <input
+                <textarea
                 name="body" type="text"
                 value={this.state.body}
                 onChange={this.handleBodyChange}
                 placeholder="내용을 입력하세요"
                 >
-                </input><br/>
+                </textarea><br/>
                 <input type="button" onClick={this.handleAddButton} value="글쓰기"></input>
             </div>
         )

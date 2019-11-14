@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 export default class Table extends Component {
 
+    state = {
+        page:1
+    }
+
     render() {
         console.log(this.props.boards)
         return (
@@ -20,13 +24,6 @@ export default class Table extends Component {
                         <td>{row.author}</td>
                         <td onClick={()=>this.props.history.push({
                             pathname:`/${this.props.cate}/${row.id}`,
-                            state:{
-                                id:row.id,
-                                author:row.author,
-                                title:row.title,
-                                body:row.body,
-                                createdAt:row.createdAt
-                            }
                         })}>{row.title}</td>
                         <td>{row.createdAt}</td>
                     </tr>

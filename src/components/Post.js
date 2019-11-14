@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class Post extends Component {
-    componentWillMount(){
-        this.setState({contents: this.props.history.location.state})
+
+    state = {
+        contents:''
     }
+
+    componentWillMount(){
+        axios.get('/getpost',{
+            params:{
+                id:this.props.match.params.postId,
+                cate:this.props.match.params.cate
+            }
+        })
+        .then((res)=>{
+            this.setState({contents:res.data[0]})
+        })
+        .catch(err=>console.log(err))
+    }
+
+
     render() {
         return (
             <div>

@@ -15,14 +15,23 @@ mongoose.connect("mongodb://localhost/reactboard")
 
 app.use(bodyParser.json())
 
-app.get('/post', cors(), (req, res)=>{
-    Post.find({cate:req.query.id},(err, posts)=>{
+app.get('/list', cors(), (req, res)=>{ //Read Boards
+    console.log(req.query)
+    Post.find({cate:req.query.cate},(err, posts)=>{
         if(err) return res.status(500).send({error:'database failure'})
         res.json(posts)
     })
 })
 
-app.post('/post', cors(), (req, res)=> {
+app.get('/getpost', (req, res) => { //Read Post
+    Post.find({cate:req.query.cate, id:req.query.id}, (err, posts) => {
+        if(err)return res.status(500).send({error:'database failure'})
+        res.json(posts)
+    })
+})
+
+
+app.post('/post', cors(), (req, res)=> { //Create Post
     var post = new Post({
         cate: req.body.cate,
         author: req.body.author,
