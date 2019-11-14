@@ -3,7 +3,7 @@ const cors = require('cors')
 const Post = require('./Model/post')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const url = require('url')
+
 
 var db = mongoose.connection
 db.on('error', console.error)
@@ -16,7 +16,7 @@ mongoose.connect("mongodb://localhost/reactboard")
 app.use(bodyParser.json())
 
 app.get('/post', cors(), (req, res)=>{
-    Post.find({cate:req.query},(err, posts)=>{
+    Post.find({cate:req.query.id},(err, posts)=>{
         if(err) return res.status(500).send({error:'database failure'})
         res.json(posts)
     })
@@ -25,7 +25,6 @@ app.get('/post', cors(), (req, res)=>{
 app.post('/post', cors(), (req, res)=> {
     var post = new Post({
         cate: req.body.cate,
-        id: req.body.id,
         author: req.body.author,
         title: req.body.title,
         body: req.body.body
