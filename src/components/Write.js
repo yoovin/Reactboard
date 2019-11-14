@@ -5,7 +5,8 @@ export default class Write extends Component {
 
     state = {
         cate:this.props.history.location.state.cate,
-        author:this.props.history.location.state.author,
+        // author:this.props.history.location.state.author,
+        author:'ㅇㅇ',
         title:'',
         body:''
     }
@@ -31,6 +32,10 @@ export default class Write extends Component {
         this.setState({body:e.target.value})
     }
 
+    handleAuthorChange = (e) => {
+        this.setState({author:e.target.value})
+    }
+
     handleAddButton = () => {
         this.addPost()
         .then((res)=>{
@@ -46,6 +51,10 @@ export default class Write extends Component {
     render() {
         return (
             <div>
+                username : <input name="author" type="text"
+                value={this.state.author}
+                onChange={this.handleAuthorChange}
+                ></input><br/>
                 <input 
                 name="title" type="text" 
                 value={this.state.title}
