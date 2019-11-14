@@ -29,6 +29,8 @@ export default class Post extends Component {
                 {this.state.contents.id}
                 {this.state.contents.createdAt}
                 <p>{this.state.contents.body}</p>
+                <br/>
+                <span>수정</span>
             </div>
         )
     }

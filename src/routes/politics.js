@@ -5,11 +5,12 @@ import axios from 'axios'
 export default class politics extends Component {
 
     state = {
+        page:2,
         cate:"politics",
         boards:''
     }
 
-    historyToAdd = () => {
+    historyToAdd = (e) => {
         this.props.history.push({
         pathname:`/${this.state.cate}/write`,
         state:{
@@ -21,7 +22,10 @@ export default class politics extends Component {
 
     componentDidMount(){
         axios.get('/list',{
-            params:{cate:this.state.cate}
+            params:{
+                cate:this.state.cate,
+                page:this.state.page
+            }
         })
         .then((res)=>this.setState({boards:res.data}))
         .catch(err=>console.log(err))
@@ -30,8 +34,7 @@ export default class politics extends Component {
     render() {
         return (
             <div>
-                {this.state.cate}
-                <p onClick={this.historyToAdd}>Add Post</p>
+                <span onClick={this.historyToAdd}>Add Post</span>
                 <Table history={this.props.history} cate={this.state.cate} boards={this.state.boards}/>
             </div>
         )

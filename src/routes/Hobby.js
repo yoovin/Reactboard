@@ -29,8 +29,7 @@ export default class Hobby extends Component {
     render() {
         return (
             <div>
-                {this.state.cate}
-                <p onClick={this.historyToAdd}>Add Post</p>
+                <span onClick={this.historyToAdd}>Add Post</span>
                 <Table history={this.props.history} cate={this.state.cate} boards={this.state.boards}/>
             </div>
         )
