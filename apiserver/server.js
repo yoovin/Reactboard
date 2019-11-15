@@ -20,7 +20,7 @@ app.get('/list', cors(), (req, res)=>{ //Read Boards
     Post.find({cate:req.query.cate},(err, posts)=>{
         if(err) return res.status(500).send({error:'database failure'})
         res.json(posts)
-    }).sort({id:-1}).skip((req.query.page - 1)*10).limit(10)
+    }).sort({id:-1}).limit(50)
 })
 
 app.get('/getpost', (req, res) => { //Read Post

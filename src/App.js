@@ -4,14 +4,14 @@ import {BrowserRouter as Router, Route} from "react-router-dom"
 
 import Home from './routes/Home'
 import About from './routes/About'
-import Nav from './components/Nav';
-import Header from './components/Header';
+import Nav from './routes/Nav';
+import Header from './routes/Header';
 import Free from './routes/Free'
 import Hobby from './routes/Hobby'
 import Politics from './routes/politics'
 import News from './routes/News'
-import Post from './components/Post';
-import Write from './components/Write';
+import Post from './routes/Post';
+import Write from './routes/Write';
 
 function App() {
   return (

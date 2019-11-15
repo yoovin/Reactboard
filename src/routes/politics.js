@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Table from '../components/Table'
 import axios from 'axios'
+import Index from '../components/Index'
 
 export default class politics extends Component {
 
     state = {
-        page:2,
+        page:1,
         cate:"politics",
         boards:''
     }
@@ -20,7 +21,7 @@ export default class politics extends Component {
         })
     }
 
-    componentDidMount(){
+    componentWillMount(){
         axios.get('/list',{
             params:{
                 cate:this.state.cate,
@@ -30,12 +31,19 @@ export default class politics extends Component {
         .then((res)=>this.setState({boards:res.data}))
         .catch(err=>console.log(err))
     }
+    
+    changeIndex = (page) => {
+        this.setState({page:page})
+    }
 
     render() {
+        var page = this.state.page
+        console.log(this.state.page)
         return (
             <div>
                 <span onClick={this.historyToAdd}>Add Post</span>
-                <Table history={this.props.history} cate={this.state.cate} boards={this.state.boards}/>
+                <Table history={this.props.history} cate={this.state.cate} boards={this.state.boards.slice(10*(page-1), 10*page)}/>
+                <Index changeIndex={this.changeIndex} page={this.state.page} boardLength={this.state.boards.length}/>
             </div>
         )
     }
