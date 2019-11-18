@@ -44,7 +44,7 @@ export default class Post extends Component {
         .catch(err=>console.log(err))
     }
 
-    changePost = () => {
+    changePost = () =>{
         return axios({
             method:'post',
             url:'/changePost',
@@ -56,6 +56,31 @@ export default class Post extends Component {
             }
         })
         .then((res)=>console.log(res))
+        .catch(err=>console.log(err))
+    }
+
+    delectCheck = () =>{
+        window.confirm("정말로 삭제하시겠습니까?") ?
+         this.delectPost()
+         .then((res)=>{
+            if(res.data.result === 1){
+                this.props.history.push(`/${this.state.contents.cate}`)
+            }else{
+                console.log(res.data)
+            }
+        })
+         : console.log("nope")
+    }
+
+    delectPost = () =>{
+        return axios({
+            method:'post',
+            url:'/delectPost',
+            data:{
+                id:this.state.contents.id,
+                cate:this.state.contents.cate
+            }
+        })
         .catch(err=>console.log(err))
     }
 
@@ -74,12 +99,11 @@ export default class Post extends Component {
                     {this.state.contents.createdAt}
                     <p>{this.state.contents.body}</p>
                     <br/>
-                    <span onClick={this.changeRWMode}>글 수정</span>
+                    <span onClick={this.changeRWMode}>글 수정</span><br/><br/>
+                    <span onClick={this.delectCheck}>글 삭제</span>
                 </div>
             )
         }else{
-            console.log(this.state.title)
-            console.log(this.state.body)
             return (
                 <div>
                     <input 

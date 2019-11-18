@@ -11,13 +11,13 @@ db.once('open', ()=>{
     console.log("Connected to mongod server")
 })
 
-mongoose.connect("mongodb://localhost/reactboard")
+mongoose.connect("mongodb://localhost/yooboard")
 
 app.use(bodyParser.json())
 
 app.get('/list', cors(), (req, res)=>{ //Read Boards
     console.log(req.query)
-    Post.find({cate:req.query.cate},(err, posts)=>{
+    Post.find({cate:req.query.cate, isDeleted:false},(err, posts)=>{
         if(err) return res.status(500).send({error:'database failure'})
         res.json(posts)
     }).sort({id:-1}).limit(50)
@@ -62,6 +62,22 @@ app.post('/changePost', cors(), (req, res) => { //Update Post
                 res.json({result:0})
             }else{
                 console.log("데이터베이스 업데이트됨!")
+                res.json({result:1})
+            }
+        })
+    })
+})
+
+app.post('/delectPost', cors(), (req, res)=>{ //Delect Post
+    Post.findOne({cate:req.body.cate, id:req.body.id}).exec((err, post)=>{
+        post.isDeleted = true
+
+        post.save((err)=>{
+            if(err){
+                console.error(err)
+                res.json({result:0})
+            }else{
+                console.log("데이터베이스 삭제됨!")
                 res.json({result:1})
             }
         })
