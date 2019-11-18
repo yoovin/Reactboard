@@ -43,12 +43,29 @@ app.post('/post', cors(), (req, res)=> { //Create Post
         if(err){
             console.error(err)
             res.json({result:0})
-            return
         }
         else{
             console.log("데이터베이스에 추가됨!")
             res.json({result:1})
         }})
     })
+
+app.post('/changePost', cors(), (req, res) => { //Update Post
+    Post.findOne({cate:req.body.cate, id:req.body.id}).exec((err, post)=>{
+        post.title = req.body.title
+        post.body = req.body.body
+        post.updateAt = Date.now
+
+        post.save((err)=>{
+            if(err){
+                console.error(err)
+                res.json({result:0})
+            }else{
+                console.log("데이터베이스 업데이트됨!")
+                res.json({result:1})
+            }
+        })
+    })
+})
 
 app.listen(5000, console.log('서버 염'))
