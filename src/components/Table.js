@@ -23,7 +23,7 @@ export default class Table extends Component {
                         <td>{row.id}</td>
                         <td>{row.author}</td>
                         <td onClick={()=>this.props.history.push({
-                            pathname:`/${this.props.cate}/${row.id}`,
+                            pathname:`/${this.props.cate}/post/${row.id}`,
                         })}>{row.title}</td>
                         <td>{row.createdAt}</td>
                     </tr>

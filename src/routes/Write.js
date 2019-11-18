@@ -5,7 +5,6 @@ export default class Write extends Component {
 
     state = {
         cate:this.props.history.location.state.cate,
-        // author:this.props.history.location.state.author,
         author:'ㅇㅇ',
         title:'',
         body:''

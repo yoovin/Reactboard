@@ -3,11 +3,11 @@ import Table from '../components/Table'
 import axios from 'axios'
 import Index from '../components/Index'
 
-export default class politics extends Component {
+export default class Humor extends Component {
 
     state = {
         page:1,
-        cate:"politics",
+        cate:"humor",
         boards:''
     }
 
